@@ -28,7 +28,7 @@ client = st.text_input(
 
 
 employee = st.text_input(
-    "Employee Name"
+    "client Name"
 )
 
 
