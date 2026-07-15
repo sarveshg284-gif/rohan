@@ -22,15 +22,17 @@ with st.form("transaction"):
 
     employee = st.text_input("Employee Name")
 
-    vehicle = st.text_input("Vehicle Number")
+    ###vehicle = st.text_input("Vehicle Number")
 
     status = st.selectbox(
         "Status",
         ["Pending","In Transit","Delivered"]
     )
 
-    remarks = st.text_area("Remarks")
-
+    remarks = st.selectbox(
+        "Remark",
+        ["successfull" , "unsuccessfull"])
+        
     upload = st.file_uploader(
         "Upload Document",
         ["pdf","jpg","png"]
