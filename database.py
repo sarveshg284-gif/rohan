@@ -86,13 +86,8 @@ def get_transactions():
 
 
 def delete_transaction(transaction_id):
-
     cursor.execute(
-        """
-        DELETE FROM transactions
-        WHERE id=?
-        """,
-        (transaction_id,)
+        "DELETE FROM transactions WHERE id = ?",
+        (int(transaction_id),)
     )
-
     conn.commit()
