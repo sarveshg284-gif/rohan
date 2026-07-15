@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import date
 
 st.title("➕ Add Transaction")
 
@@ -23,6 +24,12 @@ with st.form("transaction"):
     employee = st.text_input("Client Name")
 
     ###vehicle = st.text_input("Vehicle Number")
+
+    transaction_date = st.date_input(
+    "Transaction Date",
+    value=date.today()
+    )
+
 
     status = st.selectbox(
         "Status",
