@@ -8,6 +8,10 @@ st.title("➕ Add Transaction")
 
 with st.form("transaction"):
 
+    description = st.text_input(
+    "Description",
+    placeholder="Example: Dell Laptop Asset 101"
+    )
 
     category = st.selectbox(
         "Category",
