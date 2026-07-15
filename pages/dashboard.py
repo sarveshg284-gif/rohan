@@ -21,35 +21,39 @@ columns=[
 )
 
 
-col1,col2,col3=st.columns(3)
+
+a,b,c = st.columns(3)
 
 
-col1.metric(
+a.metric(
 "Total Transactions",
 len(df)
 )
 
 
-col2.metric(
+b.metric(
 "Total Quantity",
-df.Quantity.sum()
+df["Quantity"].sum()
 )
 
 
-col3.metric(
-"Clients",
-df.Client.nunique()
+c.metric(
+"Total Clients",
+df["Client"].nunique()
 )
 
 
 
 st.subheader(
-"Quantity Report"
+"Item Quantity"
 )
 
 
+chart=df.groupby(
+"Item"
+)["Quantity"].sum()
+
+
 st.bar_chart(
-df.groupby("Item")
-["Quantity"]
-.sum()
+chart
 )
