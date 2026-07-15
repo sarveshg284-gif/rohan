@@ -16,6 +16,7 @@ columns=[
 "Client",
 "Employee",
 "Date",
+"status",
 "Remarks"
 ]
 )
