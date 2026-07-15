@@ -65,11 +65,7 @@ def add_transaction(
 
     conn.commit()
 
-def get_today_transactions(date):
-    return pd.read_sql(
-        f"SELECT * FROM transactions WHERE date='{date}'",
-        conn
-    )
+
 def get_transactions():
     return pd.read_sql(
         "SELECT * FROM transactions ORDER BY id DESC",
