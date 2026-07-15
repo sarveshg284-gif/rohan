@@ -14,11 +14,11 @@ df = pd.DataFrame(
     data,
     columns=[
         "ID",
-        "Item",
+        "ITEM",
         "Quantity",
         "From",
+        "Client site",
         "Client",
-        "Employee",
         "Date",
         "status"
         "Remarks"
