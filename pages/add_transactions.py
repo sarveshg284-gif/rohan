@@ -30,8 +30,8 @@ with st.form("transaction"):
     )
 
     remarks = st.selectbox(
-        "Remark",
-        ["successfull" , "unsuccessfull"])
+        "Remark",placeholder="Remark"
+        ["✔️" , "❌"])
         
     upload = st.file_uploader(
         "Upload Document",
