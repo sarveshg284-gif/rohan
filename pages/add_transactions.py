@@ -29,9 +29,16 @@ with st.form("transaction"):
         ["Pending","In Transit","Delivered"]
     )
 
-    remarks = st.selectbox(
-        "Remark",placeholder="Remark"
-        ["✔️" , "❌"])
+    remark = st.text_input(
+    "Remark",
+    placeholder="Enter remark"
+    )
+    
+
+    confirmation = st.selectbox(
+    "Approval",
+    ["✔️ Approved", "❌ Rejected"]
+    )
         
     upload = st.file_uploader(
         "Upload Document",
