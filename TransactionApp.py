@@ -8,7 +8,7 @@ st.set_page_config(
 
 st.title("🏢 Office Transaction Management System")
 
-st.image("assets/logo.png", width=120)
+###st.image("assets/logo.png", width=120)
 
 st.markdown("""
 ### Welcome
