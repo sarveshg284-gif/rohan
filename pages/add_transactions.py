@@ -5,60 +5,64 @@ from database import add_transaction
 st.title("➕ Add New Transaction")
 
 
+# Use session state to clear form after save
+if "saved" not in st.session_state:
+    st.session_state.saved = False
+
+
 item = st.text_input(
-    "ITEM"
+    "Item Description",
+    key="item"
 )
 
 
 quantity = st.number_input(
     "Quantity",
     min_value=1,
-    step=1
+    step=1,
+    key="quantity"
 )
 
 
 from_location = st.text_input(
-    "From Location"
+    "From Location",
+    key="from_location"
 )
 
 
 client = st.text_input(
-    "Client / Site"
+    "Client / Site",
+    key="client"
 )
 
 
 employee = st.text_input(
-    "Employee Name"
+    "Employee Name",
+    key="employee"
 )
 
 
 date = st.date_input(
-    "Transaction Date"
+    "Transaction Date",
+    key="date"
 )
-
-status = st.selectbox(
-    "STATUS",
-    [
-        "pending",
-        "in transit",
-        "Delivered"
-    ]
-)
-
 
 
 remarks = st.selectbox(
     "Remarks",
     [
-        "✔️",
-        "❌"
-    ]
+        "Completed",
+        "Pending",
+        "Delivered",
+        "Returned",
+        "Urgent"
+    ],
+    key="remarks"
 )
 
 
 
-if st.button("Save Transaction"):
-
+if st.button("💾 Save & Next"):
 
     if item and client:
 
@@ -69,17 +73,30 @@ if st.button("Save Transaction"):
             client,
             employee,
             str(date),
-            status,
             remarks
         )
 
 
         st.success(
-            "Transaction Saved Successfully"
+            "Transaction Saved. Enter Next Transaction."
         )
+
+
+        # Clear previous values
+        for key in [
+            "item",
+            "from_location",
+            "client",
+            "employee"
+        ]:
+            st.session_state[key] = ""
+
+
+        st.rerun()
+
 
     else:
 
         st.warning(
-            "Please enter Item and Client"
+            "Please enter Item Description and Client"
         )
