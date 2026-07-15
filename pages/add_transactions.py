@@ -67,16 +67,7 @@ with st.form("transaction"):
     )
 
 
-    upload = st.file_uploader(
-        "Upload Document",
-        type=[
-            "pdf",
-            "jpg",
-            "png"
-        ]
-    )
-
-
+   
     submit = st.form_submit_button(
         "Save"
     )
