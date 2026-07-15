@@ -6,7 +6,7 @@ st.title("➕ Add New Transaction")
 
 
 item = st.text_input(
-    "Item Description"
+    "ITEM"
 )
 
 
@@ -36,9 +36,23 @@ date = st.date_input(
     "Transaction Date"
 )
 
+status = st.selectbox(
+    "STATUS",
+    [
+        "pending",
+        "in transit",
+        "Delivered"
+    ]
+)
 
-remarks = st.text_area(
-    "Remarks"
+
+
+remarks = st.selectbox(
+    "Remarks",
+    [
+        "✔️",
+        "❌"
+    ]
 )
 
 
@@ -55,6 +69,7 @@ if st.button("Save Transaction"):
             client,
             employee,
             str(date),
+            status,
             remarks
         )
 
