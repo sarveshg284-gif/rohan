@@ -38,29 +38,30 @@ def add_transaction(
     remarks
 ):
 
-    cursor.execute("""
-    INSERT INTO transactions
-    (
-    item,
-    quantity,
-    from_location,
-    client,
-    employee,
-    date,
-    remarks
+    cursor.execute(
+        """
+        INSERT INTO transactions
+        (
+        item,
+        quantity,
+        from_location,
+        client,
+        employee,
+        date,
+        remarks
+        )
+        VALUES (?,?,?,?,?,?,?)
+        """,
+        (
+        item,
+        quantity,
+        from_location,
+        client,
+        employee,
+        date,
+        remarks
+        )
     )
-    VALUES (?,?,?,?,?,?,?)
-
-    """,
-    (
-    item,
-    quantity,
-    from_location,
-    client,
-    employee,
-    date,
-    remarks
-    ))
 
     conn.commit()
 
@@ -68,21 +69,26 @@ def add_transaction(
 
 def get_transactions():
 
-    cursor.execute("""
-    SELECT * FROM transactions
-    ORDER BY id DESC
-    """)
+    cursor.execute(
+        """
+        SELECT *
+        FROM transactions
+        ORDER BY id DESC
+        """
+    )
 
     return cursor.fetchall()
 
 
 
-def delete_transaction(id):
+def delete_transaction(transaction_id):
 
-    cursor.execute("""
-    DELETE FROM transactions
-    WHERE id=?
-    """,
-    (id,))
+    cursor.execute(
+        """
+        DELETE FROM transactions
+        WHERE id=?
+        """,
+        (transaction_id,)
+    )
 
     conn.commit()
