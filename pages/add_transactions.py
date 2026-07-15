@@ -20,7 +20,7 @@ with st.form("transaction"):
 
     client = st.text_input("Client Site")
 
-    employee = st.text_input("Employee Name")
+    employee = st.text_input("Client Name")
 
     ###vehicle = st.text_input("Vehicle Number")
 
