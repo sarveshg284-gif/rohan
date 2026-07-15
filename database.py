@@ -19,6 +19,7 @@ from_location TEXT,
 client TEXT,
 employee TEXT,
 date TEXT,
+status TEXT,
 remarks TEXT
 )
 """)
@@ -35,6 +36,7 @@ def add_transaction(
     client,
     employee,
     date,
+    status,
     remarks
 ):
 
@@ -48,9 +50,10 @@ def add_transaction(
         client,
         employee,
         date,
+        status,
         remarks
         )
-        VALUES (?,?,?,?,?,?,?)
+        VALUES (?,?,?,?,?,?,?,?)
         """,
         (
         item,
@@ -59,6 +62,7 @@ def add_transaction(
         client,
         employee,
         date,
+        status,
         remarks
         )
     )
