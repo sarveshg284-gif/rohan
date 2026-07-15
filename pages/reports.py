@@ -26,31 +26,26 @@ st.subheader(
 )
 
 
-report=df.groupby(
+client_report=df.groupby(
 "Client"
 )["Quantity"].sum()
 
 
 st.bar_chart(
-report
+client_report
 )
+
 
 
 st.subheader(
-"Monthly Report"
+"Employee Report"
 )
 
 
-df["Date"]=pd.to_datetime(
-df.Date
-)
-
-
-monthly=df.groupby(
-df.Date.dt.month
+employee_report=df.groupby(
+"Employee"
 )["Quantity"].sum()
 
 
 st.line_chart(
-monthly
-)
+employee_report
