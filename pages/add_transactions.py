@@ -17,7 +17,7 @@ with st.form("transaction_form", clear_on_submit=True):
 
     client = st.text_input("Client / Site")
 
-    employee = st.text_input("Employee Name")
+    employee = st.text_input("Client Name")
 
     date = st.date_input("Transaction Date")
 
