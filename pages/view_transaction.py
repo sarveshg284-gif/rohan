@@ -86,18 +86,16 @@ if data:
     st.subheader("Delete Transaction")
 
     delete_id = st.number_input(
-        "Transaction ID",
-        min_value=1,
-        step=1
+    "Transaction ID",
+    min_value=1,
+    step=1,
+    format="%d"
     )
 
     if st.button("Delete"):
-
-        delete_transaction(delete_id)
-
-        st.success("Transaction Deleted")
-
-        st.rerun()
+    delete_transaction(int(delete_id))
+    st.success("Transaction Deleted")
+    st.rerun()
 
 else:
 
