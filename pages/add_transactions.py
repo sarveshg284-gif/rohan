@@ -29,15 +29,9 @@ with st.form("transaction"):
         ["Pending","In Transit","Delivered"]
     )
 
-    remark = st.text_input(
+    status = st.selectbox(
     "Remark",
-    placeholder="Enter remark"
-    )
-    
-
-    confirmation = st.selectbox(
-    "Approval",
-    ["✔️ Approved", "❌ Rejected"]
+    ["✔️ Yes", "❌ No"]
     )
         
     upload = st.file_uploader(
