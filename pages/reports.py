@@ -6,46 +6,43 @@ from database import get_transactions
 st.title("📈 Reports")
 
 
-df=pd.DataFrame(
-get_transactions(),
-columns=[
-"ID",
-"Item",
-"Quantity",
-"From",
-"Client",
-"Employee",
-"Date",
-"Remarks"
-]
+data = get_transactions()
+
+
+df = pd.DataFrame(
+    data,
+    columns=[
+        "ID",
+        "Item",
+        "Quantity",
+        "From",
+        "Client",
+        "Employee",
+        "Date",
+        "Remarks"
+    ]
 )
 
 
-st.subheader(
-"Client Wise Report"
-)
+if len(df) > 0:
+
+    st.subheader("Client Wise Report")
+
+    client_report = df.groupby(
+        "Client"
+    )["Quantity"].sum()
+
+    st.bar_chart(client_report)
 
 
-client_report=df.groupby(
-"Client"
-)["Quantity"].sum()
+    st.subheader("Employee Wise Report")
 
+    employee_report = df.groupby(
+        "Employee"
+    )["Quantity"].sum()
 
-st.bar_chart(
-client_report
-)
+    st.line_chart(employee_report)
 
+else:
 
-
-st.subheader(
-"Employee Report"
-)
-
-
-employee_report=df.groupby(
-"Employee"
-)["Quantity"].sum()
-
-
-st.line_chart(
-employee_report
+    st.info("No transactions available")
