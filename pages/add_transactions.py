@@ -2,19 +2,22 @@ import streamlit as st
 from database import add_transaction
 
 
-st.title("➕ Add Transaction")
+st.title("➕ Add New Transaction")
 
 
-item = st.text_input("Item Description")
+item = st.text_input(
+    "Item Description"
+)
 
 
 quantity = st.number_input(
     "Quantity",
-    min_value=1
+    min_value=1,
+    step=1
 )
 
 
-location = st.text_input(
+from_location = st.text_input(
     "From Location"
 )
 
@@ -30,7 +33,7 @@ employee = st.text_input(
 
 
 date = st.date_input(
-    "Date"
+    "Transaction Date"
 )
 
 
@@ -40,20 +43,28 @@ remarks = st.text_area(
 
 
 
-if st.button("Save"):
+if st.button("Save Transaction"):
 
 
-    add_transaction(
-        item,
-        quantity,
-        location,
-        client,
-        employee,
-        str(date),
-        remarks
-    )
+    if item and client:
+
+        add_transaction(
+            item,
+            quantity,
+            from_location,
+            client,
+            employee,
+            str(date),
+            remarks
+        )
 
 
-    st.success(
-        "Transaction Added"
-    )
+        st.success(
+            "Transaction Saved Successfully"
+        )
+
+    else:
+
+        st.warning(
+            "Please enter Item and Client"
+        )
