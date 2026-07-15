@@ -5,59 +5,54 @@ from database import add_transaction
 st.title("➕ Add New Transaction")
 
 
-# Use session state to clear form after save
-if "saved" not in st.session_state:
-    st.session_state.saved = False
-
-
 item = st.text_input(
-    "Item Description",
-    key="item"
+    "ITEM"
 )
 
 
 quantity = st.number_input(
     "Quantity",
     min_value=1,
-    step=1,
-    key="quantity"
+    step=1
 )
 
 
 from_location = st.text_input(
-    "From Location",
-    key="from_location"
+    "From Location"
 )
 
 
 client = st.text_input(
-    "Client / Site",
-    key="client"
+    "Client / Site"
 )
 
 
 employee = st.text_input(
-    "Employee Name",
-    key="employee"
+    "Employee Name"
 )
 
 
 date = st.date_input(
-    "Transaction Date",
-    key="date"
+    "Transaction Date"
 )
+
+status = st.selectbox(
+    "STATUS",
+    [
+        "pending",
+        "in transit",
+        "Delivered"
+    ]
+)
+
 
 
 remarks = st.selectbox(
     "Remarks",
     [
-        "Completed",
-        "Pending",
-        "Delivered",
-        "Returned",
-        "Urgent"
-    ],
-    key="remarks"
+        "✔️",
+        "❌"
+    ]
 )
 
 
@@ -73,6 +68,7 @@ if st.button("💾 Save & Next"):
             client,
             employee,
             str(date),
+            status,
             remarks
         )
 
@@ -98,5 +94,5 @@ if st.button("💾 Save & Next"):
     else:
 
         st.warning(
-            "Please enter Item Description and Client"
+            "Please enter Item  and Client"
         )
