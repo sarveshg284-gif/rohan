@@ -4,11 +4,11 @@ st.title("➕ Add Transaction")
 
 with st.form("transaction"):
 
-    description = st.text_input("Description")
+    ###description = st.text_input("Description")
 
     category = st.selectbox(
         "Category",
-        ["Laptop","Printer","Furniture","Stationery","Other"]
+        ["Laptop","Keyboard","CPU","Mouse","Other"]
     )
 
     quantity = st.number_input(
