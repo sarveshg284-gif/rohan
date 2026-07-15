@@ -4,17 +4,7 @@ import pandas as pd
 conn = sqlite3.connect("database/transaction.db", check_same_thread=False)
 cursor = conn.cursor()
 
-# ---------------- USERS ----------------
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS users(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    fullname TEXT,
-    username TEXT UNIQUE,
-    password TEXT,
-    role TEXT
-)
-""")
 
 # ---------------- TRANSACTIONS ----------------
 
@@ -35,28 +25,6 @@ CREATE TABLE IF NOT EXISTS transactions(
 """)
 
 conn.commit()
-
-
-# ===================== USERS =====================
-
-def add_user(fullname, username, password, role):
-    cursor.execute(
-        """
-        INSERT INTO users(fullname, username, password, role)
-        VALUES(?,?,?,?)
-        """,
-        (fullname, username, password, role),
-    )
-    conn.commit()
-
-
-def get_users():
-    return pd.read_sql("SELECT * FROM users", conn)
-
-
-def delete_user(user_id):
-    cursor.execute("DELETE FROM users WHERE id=?", (user_id,))
-    conn.commit()
 
 
 # ================= TRANSACTIONS =================
