@@ -28,7 +28,7 @@ conn.commit()
 
 
 
-def add_transactions(
+def add_transaction(
     item,
     quantity,
     from_location,
@@ -81,7 +81,7 @@ def get_transactions():
 
 
 
-def delete_transactions(transaction_id):
+def delete_transaction(transaction_id):
 
     cursor.execute(
         """
