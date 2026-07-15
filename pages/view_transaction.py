@@ -36,7 +36,7 @@ if data:
             )
         ]
 
-    # Convert Date
+    # Date Filter
     df["Date"] = pd.to_datetime(df["Date"])
 
     col1, col2 = st.columns(2)
@@ -58,7 +58,7 @@ if data:
         use_container_width=True
     )
 
-    # Excel Download
+    # Excel Export
     output = BytesIO()
 
     with pd.ExcelWriter(
@@ -75,7 +75,7 @@ if data:
     excel_data = output.getvalue()
 
     st.download_button(
-        label="📥 Download Excel",
+        "📥 Download Excel",
         data=excel_data,
         file_name="transactions.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -86,16 +86,19 @@ if data:
     st.subheader("Delete Transaction")
 
     delete_id = st.number_input(
-    "Transaction ID",
-    min_value=1,
-    step=1,
-    format="%d"
+        "Transaction ID",
+        min_value=1,
+        step=1,
+        format="%d"
     )
 
     if st.button("Delete"):
-    delete_transaction(int(delete_id))
-    st.success("Transaction Deleted")
-    st.rerun()
+
+        delete_transaction(delete_id)
+
+        st.success("Transaction Deleted Successfully")
+
+        st.rerun()
 
 else:
 
