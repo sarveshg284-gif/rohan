@@ -1,99 +1,104 @@
 import streamlit as st
 import pandas as pd
-from database.database import get_transactions, delete_transaction
+from database import get_transactions,delete_transaction
 
 
 st.title("📋 Transactions")
 
 
-# Get transactions from database
-df = get_transactions()
+rows=get_transactions()
 
 
-if df.empty:
 
-    st.info("No transactions available")
+df=pd.DataFrame(
+rows,
+columns=[
+"ID",
+"Item",
+"Quantity",
+"From",
+"Client",
+"Employee",
+"Date",
+"Remarks"
+]
+)
 
-else:
 
-    # Search box
-    search = st.text_input(
-        "🔍 Search Description / Client"
+
+start=st.date_input(
+"From Date"
+)
+
+
+end=st.date_input(
+"To Date"
+)
+
+
+
+df["Date"]=pd.to_datetime(
+df["Date"]
+)
+
+
+df=df[
+(df.Date>=pd.to_datetime(start))
+&
+(df.Date<=pd.to_datetime(end))
+]
+
+
+
+search=st.text_input(
+"Search Item"
+)
+
+
+
+if search:
+
+    df=df[
+    df.Item.str.contains(
+        search,
+        case=False
+    )
+    ]
+
+
+
+st.dataframe(
+df,
+use_container_width=True
+)
+
+
+
+excel=df.to_excel(
+index=False
+)
+
+
+
+st.download_button(
+"📥 Download Excel",
+excel,
+"transactions.xlsx"
+)
+
+
+
+delete_id=st.number_input(
+"Delete ID",
+min_value=1
+)
+
+
+
+if st.button("Delete"):
+
+    delete_transaction(
+        delete_id
     )
 
-
-    # Status filter
-    status = st.selectbox(
-        "Filter Status",
-        [
-            "All",
-            "Pending",
-            "In Transit",
-            "Delivered"
-        ]
-    )
-
-
-    # Search filtering
-    if search:
-
-        df = df[
-            df["description"]
-            .str.contains(
-                search,
-                case=False,
-                na=False
-            )
-            |
-            df["to_client"]
-            .str.contains(
-                search,
-                case=False,
-                na=False
-            )
-        ]
-
-
-    # Status filtering
-    if status != "All":
-
-        df = df[
-            df["status"] == status
-        ]
-
-
-    # Display table
-
-    st.subheader("Transaction List")
-
-    st.dataframe(
-        df,
-        use_container_width=True
-    )
-
-
-    # Delete transaction
-
-    st.divider()
-
-    st.subheader("🗑 Delete Transaction")
-
-
-    transaction_id = st.number_input(
-        "Enter Transaction ID",
-        min_value=1,
-        step=1
-    )
-
-
-    if st.button("Delete"):
-
-        delete_transaction(
-            transaction_id
-        )
-
-        st.success(
-            "Transaction deleted successfully"
-        )
-
-        st.rerun()
+    st.rerun()
