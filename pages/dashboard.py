@@ -3,22 +3,40 @@ import pandas as pd
 from database.database import get_transactions
 
 
-st.title("📊 Dashboard")
+# Page configuration
+st.set_page_config(
+    page_title="Dashboard",
+    page_icon="📊",
+    layout="wide"
+)
 
 
-# Get data from database
+st.title("📊 Office Transaction Dashboard")
+
+
+# Refresh button
+if st.button("🔄 Refresh Dashboard"):
+    st.rerun()
+
+
+# Get transaction data from database
 df = get_transactions()
 
 
+# Check data availability
 if df.empty:
 
-    st.warning("No transactions found")
+    st.warning(
+        "No transactions found. Please add transactions first."
+    )
 
 else:
 
-    # Calculate statistics
+    # ---------------- KPI CARDS ----------------
 
     total_transactions = len(df)
+
+    total_quantity = df["quantity"].sum()
 
     pending = len(
         df[df["status"] == "Pending"]
@@ -33,69 +51,110 @@ else:
     )
 
 
-    # Display cards
-
     col1, col2, col3, col4 = st.columns(4)
 
 
     col1.metric(
-        "Total Transactions",
+        "📋 Total Transactions",
         total_transactions
     )
 
+
     col2.metric(
-        "Pending",
+        "📦 Total Quantity",
+        total_quantity
+    )
+
+
+    col3.metric(
+        "⏳ Pending",
         pending
     )
 
-    col3.metric(
-        "Delivered",
+
+    col4.metric(
+        "✅ Delivered",
         delivered
     )
 
-    col4.metric(
-        "In Transit",
-        in_transit
+
+    st.divider()
+
+
+    # ---------------- STATUS CHART ----------------
+
+    st.subheader(
+        "📈 Transaction Status"
+    )
+
+
+    status_count = (
+        df["status"]
+        .value_counts()
+    )
+
+
+    st.bar_chart(
+        status_count
     )
 
 
     st.divider()
 
 
-    # Transaction chart
+    # ---------------- CATEGORY CHART ----------------
 
-    st.subheader("📈 Transaction Status")
-
-
-    status_count = df["status"].value_counts()
-
-
-    st.bar_chart(status_count)
+    st.subheader(
+        "📦 Category Wise Transactions"
+    )
 
 
-    st.divider()
+    category_count = (
+        df["category"]
+        .value_counts()
+    )
 
 
-    # Category chart
-
-    st.subheader("📦 Category Wise Transactions")
-
-
-    category_count = df["category"].value_counts()
-
-
-    st.bar_chart(category_count)
+    st.bar_chart(
+        category_count
+    )
 
 
     st.divider()
 
 
-    # Recent transactions
+    # ---------------- RECENT TRANSACTIONS ----------------
 
-    st.subheader("Recent Transactions")
+    st.subheader(
+        "📝 Recent Transactions"
+    )
+
+
+    recent = df.head(10)
 
 
     st.dataframe(
-        df.head(10),
+        recent,
         use_container_width=True
+    )
+
+
+    st.divider()
+
+
+    # ---------------- CLIENT SUMMARY ----------------
+
+    st.subheader(
+        "🏢 Client Wise Transactions"
+    )
+
+
+    client_count = (
+        df["to_client"]
+        .value_counts()
+    )
+
+
+    st.bar_chart(
+        client_count
     )
