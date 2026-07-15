@@ -11,13 +11,11 @@ cursor = conn.cursor()
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS transactions(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    description TEXT,
     category TEXT,
     quantity INTEGER,
     from_location TEXT,
     to_client TEXT,
     employee TEXT,
-    vehicle TEXT,
     date TEXT,
     status TEXT,
     remarks TEXT
@@ -30,13 +28,11 @@ conn.commit()
 # ================= TRANSACTIONS =================
 
 def add_transaction(
-    description,
     category,
     quantity,
     from_location,
     to_client,
     employee,
-    vehicle,
     date,
     status,
     remarks,
@@ -44,13 +40,11 @@ def add_transaction(
     cursor.execute(
         """
         INSERT INTO transactions(
-            description,
             category,
             quantity,
             from_location,
             to_client,
             employee,
-            vehicle,
             date,
             status,
             remarks
@@ -58,13 +52,11 @@ def add_transaction(
         VALUES(?,?,?,?,?,?,?,?,?,?)
         """,
         (
-            description,
             category,
             quantity,
             from_location,
             to_client,
             employee,
-            vehicle,
             date,
             status,
             remarks,
