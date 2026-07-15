@@ -76,16 +76,20 @@ with st.form("transaction"):
 if submit:
 
     add_transaction(
-        category,              # description
-        category,
-        quantity,
-        from_location,
-        client,
-        employee,
-        "",                    # vehicle
-        str(transaction_date),
-        status,
-        remark
+        description=category,
+        category=category,
+        quantity=quantity,
+        from_location=from_location,
+        to_client=client,
+        employee=employee,
+        vehicle="",
+        date=str(transaction_date),
+        status=status,
+        remarks=remark
+    )
+
+    st.success(
+        "Transaction Saved Successfully"
     )
 
 
