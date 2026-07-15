@@ -19,6 +19,7 @@ df = pd.DataFrame(
         "Client",
         "Employee",
         "Date",
+        "status",
         "Remarks"
     ]
 )
