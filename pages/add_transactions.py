@@ -31,7 +31,7 @@ with st.form("transaction"):
 
     status = st.selectbox(
     "Remark",
-    ["✔️ Yes", "❌ No"]
+    ["✔️", "❌"]
     )
         
     upload = st.file_uploader(
