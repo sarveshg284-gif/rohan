@@ -9,9 +9,10 @@ st.title("➕ Add Transaction")
 with st.form("transaction"):
 
     description = st.text_input(
-    "Description",
-    placeholder="Example: Dell Laptop Asset 101"
+        "Description",
+        placeholder="Example: Dell Laptop"
     )
+
 
     category = st.selectbox(
         "Category",
@@ -71,7 +72,16 @@ with st.form("transaction"):
     )
 
 
-   
+    upload = st.file_uploader(
+        "Upload Document",
+        type=[
+            "pdf",
+            "jpg",
+            "png"
+        ]
+    )
+
+
     submit = st.form_submit_button(
         "Save"
     )
@@ -80,22 +90,17 @@ with st.form("transaction"):
 if submit:
 
     add_transaction(
-        description=category,
-        category=category,
-        quantity=quantity,
-        from_location=from_location,
-        to_client=client,
-        employee=employee,
-        vehicle="",
-        date=str(transaction_date),
-        status=status,
-        remarks=remark
+        description,
+        category,
+        quantity,
+        from_location,
+        client,
+        employee,
+        "",
+        str(transaction_date),
+        status,
+        remark
     )
-
-    st.success(
-        "Transaction Saved Successfully"
-    )
-
 
     st.success(
         "Transaction Saved Successfully"
